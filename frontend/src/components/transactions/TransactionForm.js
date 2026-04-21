@@ -31,7 +31,7 @@ export default function TransactionForm({ fetchTransactions }) {
       await API.post("/transactions", {
         ...form,
         amount: Number(form.amount),
-        date: form.date // ✅ FIXED (send string)
+        date: form.date
       });
 
       setForm({
@@ -52,16 +52,26 @@ export default function TransactionForm({ fetchTransactions }) {
   };
 
   return (
-    <form onSubmit={submit} className="card">
+    <form onSubmit={submit} className="card transaction-form">
       <h3>Add Transaction</h3>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
 
-      <select name="type" value={form.type} onChange={handleChange}>
-        <option value="income">Income</option>
-        <option value="expense">Expense</option>
-      </select>
+      {/* 🔽 TYPE DROPDOWN */}
+      <div className="input-group">
+        <label>Type</label>
+        <select
+          name="type"
+          value={form.type}
+          onChange={handleChange}
+          className="custom-select"
+        >
+          <option value="income">💰 Income</option>
+          <option value="expense">💸 Expense</option>
+        </select>
+      </div>
 
+      {/* INPUTS */}
       <input
         name="title"
         placeholder="Title"
@@ -71,7 +81,7 @@ export default function TransactionForm({ fetchTransactions }) {
 
       <input
         name="category"
-        placeholder="Category (optional)"
+        placeholder="Category (Food, Travel...)"
         value={form.category}
         onChange={handleChange}
       />

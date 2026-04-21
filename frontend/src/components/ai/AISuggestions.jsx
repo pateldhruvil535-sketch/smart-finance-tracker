@@ -166,7 +166,7 @@ return (
       </div>
 
       <div className="score-info">
-        <h4>Financial Health</h4>
+        <h4 style={{ color: "#ffffff" }}>Financial Health</h4>
         <p>
           {score > 75
             ? "Excellent 💚"

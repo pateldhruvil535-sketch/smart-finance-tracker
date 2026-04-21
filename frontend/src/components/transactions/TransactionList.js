@@ -41,28 +41,36 @@ export default function TransactionList({ transactions, fetchTransactions }) {
     <div className="card">
       <h3>Transactions</h3>
 
-      {transactions.map((t) => (
-        <div key={t._id} className="transaction">
-          <div>
-            <strong>{t.title}</strong>
-            <br />
-            <small>{formatDate(t.date)}</small>
-          </div>
+  {transactions.map((t) => (
+  <div key={t._id} className="transaction">
+    {/* LEFT SIDE */}
+    <div>
+      <strong>{t.title}</strong>
+      <br />
+      <small>{formatDate(t.date)}</small>
+    </div>
 
-          <div>
-            <span
-              style={{
-                color: t.type === "income" ? "#22c55e" : "#ef4444"
-              }}
-            >
-              {/* 💱 FINAL FIX */}
-              {formatCurrency(convert(t.amount), currency)}
-            </span>
+    {/* RIGHT SIDE */}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "12px"
+      }}
+    >
+      <span
+        style={{
+          color: t.type === "income" ? "#22c55e" : "#ef4444",
+          fontWeight: "500"
+        }}
+      >
+        {formatCurrency(convert(t.amount), currency)}
+      </span>
 
-            <button onClick={() => del(t._id)}>Delete</button>
-          </div>
-        </div>
-      ))}
+      <button onClick={() => del(t._id)}>Delete</button>
+    </div>
+  </div>
+))}
     </div>
   );
 }

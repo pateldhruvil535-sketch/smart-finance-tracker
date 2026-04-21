@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
+import Layout from "./components/layout/Layout";
 
 import PrivateRoute from "./components/auth/PrivateRoute";
 
@@ -44,24 +45,27 @@ function App() {
           element={!token ? <Register /> : <Navigate to="/dashboard" />}
         />
 
-        {/* Protected */}
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
+     <Route
+  path="/dashboard"
+  element={
+    <PrivateRoute>
+      <Layout>
+        <Dashboard />
+      </Layout>
+    </PrivateRoute>
+  }
+/>
 
-        <Route
-          path="/analytics"
-          element={
-            <PrivateRoute>
-              <Analytics />
-            </PrivateRoute>
-          }
-        />
+<Route
+  path="/analytics"
+  element={
+    <PrivateRoute>
+      <Layout>
+        <Analytics />
+      </Layout>
+    </PrivateRoute>
+  }
+/> 
 
         {/* 404 */}
         <Route path="*" element={<NotFound />} />
