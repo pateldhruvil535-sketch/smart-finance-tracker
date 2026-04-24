@@ -12,6 +12,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ✅ Root route (ADD THIS)
+app.get("/", (req, res) => {
+  res.send("Smart Finance API is running 🚀");
+});
+
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/transactions", require("./routes/transactionRoutes"));
